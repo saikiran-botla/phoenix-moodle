@@ -1,0 +1,169 @@
+{% extends 'moodle/main.html' %}
+
+{% block content %}
+<center>
+	<br>
+	<h2>{{assignment.name}} Submission</h2>
+	<br>
+	<table>
+		<tr>
+			<td style="font-size: 24px;">Related files</td>
+			<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			<td>
+				{% if assignment.file %}
+				<a href="{{assignment.file.url}}" download>	{{assignment.file}} </a></td>
+				{% else %}
+					<p>No File</p>
+				{% endif %}
+		</tr>
+		<tr>
+			<td style="font-size: 24px;">Description</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			<td>{{assignment.statement}}</td>
+		</tr>
+		<tr>
+			<td style="font-size: 24px;">Max Marks</td>
+			<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			<td>{{assignment.total}}</td>
+		</tr>
+		<tr>
+			<td style="font-size: 24px;">Due date</td>
+			<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>
+					{% if assignment.deadline %}
+						{{assignment.deadline}}
+					{% else %}
+						<p>No deadline</p>
+					{% endif %}
+				</td>
+		</tr>
+		<tr>
+			<td style="font-size: 24px;">weightage</td>
+			<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>{{assignment.weightage}}%</td>
+		</tr>
+	</table>
+	
+	<hr>
+<h4>You have already submitted, below is your submission</h4>
+	<table>
+		<tr>
+			<td style="font-size: 24px;">Submitted file</td>
+			<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			<td><a href="{{mysubmission.submittedfile.url}}" download>{{mysubmission.submittedfile}}</a></td>
+		</tr>
+		<tr>
+			<td style="font-size: 24px;">Grading Status</td>
+			<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			<td>{{mysubmission.statusofcorrection}}</td>
+		</tr>
+		<tr>
+			<td style="font-size: 24px;">Grade</td>
+			<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			<td>{{mysubmission.grade}}</td>
+		</tr>
+		<tr>
+			<td style="font-size: 24px;">Feedback</td>
+			<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			<td>{{mysubmission.feedback}}</td>
+		</tr>
+	</table>
+	<br>
+
+{% if today.date < assignment.deadline.date %}
+	<hr>
+	<br>
+
+	<h4>Update submission</h4>
+<br>
+	<form method="POST" enctype="multipart/form-data">
+		{% csrf_token %}
+  
+    	{{form.submittedfile.label}}
+    	{{form.submittedfile}} <br><br>
+      
+    <input type="submit" value="Submit">		
+	</form>
+	<br>
+	<a href="{% url 'student' pk %}"><button>Back</button></a>
+
+{% elif today.date == assignment.deadline.date and today.time <= assignment.deadline.time  %}
+	<hr>
+	<br>
+	<form method="POST" enctype="multipart/form-data">
+		{% csrf_token %}
+  
+    	{{form.submittedfile.label}}
+    	{{form.submittedfile}} <br><br>
+      
+    <input type="submit" value="Submit">		
+	</form>
+	<br>
+	<a href="{% url 'student' pk %}"><button>Back</button></a>
+
+{% endif %}
+</center>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'moodle/main.html' %}
+
+{% block content %}
+<center>
+	<br>
+	<br>
+	{% for course in courses %}
+		<a href="{% url 'student' course %}"><button style="font-size: 50px;">{{course}}</button><br><br></a>
+	{% endfor %}
+	<hr>
+	<h2>To Do list</h2>
+	{% for assignment in todo %}
+		<p style="font-size:25px;">{{assignment.course.title}}/ {{assignment.name}} - 
+
+			{% if today.date < assignment.deadline.date %}
+				Due on {{assignment.deadline}}
+			{% elif today.date == assingment.deadline.date and today.time <= assignment.deadline.time %}
+				Due on {{assignment.deadline}}
+			{% else %}
+				Over due
+			{% endif %}
+
+		</p><br><br>
+	{% endfor %}
+</center>
+{% endblock %}

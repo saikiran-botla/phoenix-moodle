@@ -1,0 +1,13 @@
+{% extends 'moodle/main.html' %}
+{% block content %}
+<a href="{% url 'home' %}">Home/</a>
+	<center>
+		<br>
+		<br>
+	{% for course in courses %}
+		<a href="{% url 'viewtacourses' course.title %}"><button style="font-size:50px">{{course.title}}</button></a>
+		<br>
+		<br>
+	{% endfor %}
+</center>
+{% endblock %}

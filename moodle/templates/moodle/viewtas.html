@@ -1,0 +1,42 @@
+{% extends 'moodle/main.html' %}
+{% block content %}
+	<center>
+		<h2>TA's for this course are</h2>
+		<br>
+		<br>
+		<table>
+			<tr>
+				<td>
+					<p style="font-size:32"> Name</p>
+				</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td><p style="font-size:32">Modify</p></td>
+			</tr>
+			{% for user in users %}
+			<tr>
+				<td><p style="font-size: 32">{{user.username}}</p></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td><a href="{% url 'modifyta' pk user.username %}"><button>modify privileges</button></a></td>
+			</tr>
+			{% endfor %}
+		</table>
+		<br>
+		<a href="{% url 'instructor' pk %}"><button>Back</button></a>
+	</center>
+
+
+{% endblock %}

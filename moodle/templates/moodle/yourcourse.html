@@ -1,0 +1,21 @@
+{% extends 'moodle/main.html' %}
+
+{% block content %}
+<a href="{% url 'home' %}">Home</a>
+<center>
+	<br>
+	<br>
+	{% for course in courses %}
+		
+			<a href="{% url 'instructor' course %}"><button style="font-size: 50px;" >{{course}}</button><br><br> </a>
+
+
+	{% endfor %}
+
+	<hr>
+	<h2>To Do list</h2>
+	{% for assignment in todo %}
+		<p style="font-size:25px">{{assignment.course.title}}/{{assignment.name}} is pending for evalution</p>
+	{% endfor %}
+</center>
+{% endblock %}

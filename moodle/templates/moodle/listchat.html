@@ -1,0 +1,27 @@
+{% extends 'moodle/main.html' %}
+
+{% block content %}
+	<center>
+		<br>
+		<h2>Start a conversation below</h2>
+			<table>
+				{% for user in users %}
+				{% if user != loginuser %}
+				<tr>
+					<td>{{user.username}}</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td><a href="{% url 'chat' user.username %}"><button>chat</button></a></td>
+				</tr>
+				{% endif %}
+				{% endfor %}
+			</table>
+			<a href="{% url 'home' %}">Home</a>
+	</center>
+{% endblock %}

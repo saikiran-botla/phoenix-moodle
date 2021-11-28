@@ -1,0 +1,42 @@
+{% extends 'moodle/main.html' %}
+{% block content %}
+
+<center>
+	<br>
+	<br>
+	<br>
+	<br>
+<h1>Hello,{{request.user}}  </h1>
+<br>
+<br>
+
+
+<a href="{% url 'yourcourse' %}"><button style="font-size: 22px;">Your Courses</button></a>
+<br>
+<br>
+<a href="{% url 'tacourses' %}"><button style="font-size:22px;">Courses as TA</button></a>
+<br>
+<br>
+<a href="{% url 'joinedcourse' %}"><button style="font-size: 22px;" >Courses Undertaken</button></a>
+<br>
+<br>
+<a href="{% url 'listchat' %}"><button style="font-size: 22px;">Chat with users</button></a>
+<br>
+
+</center>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

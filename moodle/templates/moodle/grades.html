@@ -1,0 +1,176 @@
+{% extends 'moodle/main.html' %}
+
+{% block content %}
+	<center>
+		<br>
+		<h1>Course overview</h1>
+		<br>
+		<table>
+			<tr>
+				<td><h4>Assignment</h4></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td><h4>weightage</h4></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td><h4>Max Marks</h4></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td><h4>Status of correction</h4></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td><h4>Grade</h4></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td><h4>Submitted file</h4></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td><h4>Mean</h4></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td><h4>Comments</h4></td>
+			</tr>
+			{% for assignment in assignments %}
+				<tr>
+					<td style="font-size:20px;"><p>{{assignment.name}}</p></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td style="font-size:20px;"><p>{{assignment.weightage}}%</p></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td style="font-size:20px;"><p>{{assignment.total}}</p></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td style="font-size:20px;">
+						{% for sub in mysubmissions %}
+							{% if sub.assignment == assignment %}
+								<p>{{sub.statusofcorrection}}	</p>
+							{% endif %}
+						{% endfor %}
+					</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td style="font-size:20px;">
+						{% for sub in mysubmissions %}
+							{% if sub.assignment == assignment %}
+								<p>{{sub.grade}}</p>
+							{% endif %}
+						{% endfor %}
+					</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>
+						{% for sub in mysubmissions %}
+							{% if sub.assignment == assignment %}
+								 <a href="{{sub.submittedfile.url}}" download>{{sub.submittedfile}}</a>
+							{% endif %}
+						{% endfor %}
+					</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>{{mean.assignment }}</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>
+						{% for sub in mysubmissions %}
+							{% if sub.assignment == assignment %}
+								{% if sub.grade < mean.assignment %}
+									
+										<p style="color:red;">Your score is less than mean</p>
+								{% endif %}
+							{% endif %}
+						{% endfor %}
+				{% endfor %}
+					</td>
+				</tr>
+		</table>
+		<hr>
+		<h5>course total : {{coursetotal}}</h5>
+		<br>
+		<a href="{% url 'student' pk %}"><button>Back</button></a>
+	</center>
+{% endblock %}

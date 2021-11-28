@@ -1,0 +1,35 @@
+{% extends 'moodle/main.html' %}
+
+{% block content %}
+
+<center>
+	<h1>{{pk}}</h1>
+	<h3>Your Assignments</h3>
+	<h5>{{com}}% of course is completed </h5>
+	<br>
+	<a href="{% url 'announcement' pk %}"><button>Announcements</button></a>
+	{% if course.dis_status %}
+	<a href="{% url 'discussion' pk %}"><button>Discussion forum</button></a>
+	{% endif %}
+	<a href="{% url 'grade' pk %}"><button>Grades</button></a>
+	<br>
+	<br>
+{% for Assignment in Assignments %}
+	<a href="{% url 'viewassignment' pk Assignment.name %}"><button style="font-size: 22px;">{{Assignment}}</button></a> <br><br>
+
+{% endfor %}
+
+
+
+
+</center>
+
+
+
+
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,133 @@
+{% extends 'moodle/main.html' %}
+
+{% block content %}
+<a href="{% url 'home' %}">  Home/</a>
+<a href="{% url 'yourcourse' %}">Your courses/</a>
+<center>
+	<h1 >{{title}}</h1> 
+	<br>
+	<br>
+	<table>
+		<tr>
+			<td><a href="{% url 'assignment' title %}"><button style="font-size: 24px;">Create new Assignment</button></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><a href="{% url 'addTa' title %}"><button style="font-size: 24px;">Add TA</button></a></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><a href="{% url 'enroll' title %}"><button style="font-size: 24px;">Enroll</button></a></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><a href="{% url 'viewta' title %}"><button style="font-size: 24px;">All TA's</button></a></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><a href="{% url 'announcement' title %}"><button style="font-size: 24px;">Announcements</button></td>
+				<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td>
+				<a href="{% url 'discussion' title %}"><button style="font-size: 24px;">Discussion forum</button></a>
+			</td>
+		</tr>
+	</table>
+	<br>
+	<br>
+	<br>
+	<h4>Change the visibilty of discussion forum</h4>
+	<form method="POST">
+		{% csrf_token %}
+		{{form.as_p}}
+		<input type="submit" name="" value="Save"><br>
+		current status {{course.dis_status}}
+	</form>
+	<br>
+	<br>
+<h3>Assignments</h3><br>
+
+{% for Assignment in Assignments %}
+	<a href="{% url 'viewsubmissions' title Assignment.name %}"><button style="font-size: 22px;">{{Assignment.name}}</button></a> <br> <br>
+
+{% endfor %}
+
+<img src="data:image/png;base64,{{ image_base64 }}" alt="" height='700' width="900">
+
+
+
+
+
+
+</center>
+
+
+
+
+{% endblock %}

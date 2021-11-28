@@ -1,0 +1,19 @@
+{% extends 'moodle/main.html' %}
+
+{% block content %}
+<center>
+	<br>
+	<h2>Enroll a user</h2>
+	<form method="POST">
+		{% csrf_token %}
+		{{form.as_p}}
+		<input type="submit" name="Submit">
+		
+	</form>
+	{% if mes %}
+	<p style="color:blue">{{mes}}</p>
+{% endif %}
+<br>
+</center>
+
+{% endblock %}

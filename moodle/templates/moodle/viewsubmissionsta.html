@@ -1,0 +1,290 @@
+{% extends 'moodle/main.html' %}
+
+{% block content %}
+<center>
+	<br>
+	<h2>{{assignment.name}}</h2>
+	<br>
+	<br>
+	<table>
+		<tr>
+			<td style="font-size: 24px;">file</td>
+			<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				{% if assignment.file %}
+			<td><a href="{{assignment.file.url}}" download>	{{assignment.file}} </a></td>
+				{% else %}
+				<td><p>No file</p></td>
+				{% endif %}
+		</tr>
+		<tr>
+			<td style="font-size: 24px;">Statment</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			<td>
+				{% if assignment.statement %}
+			{{assignment.statement}}
+				{% else %}
+					<p>None</p>
+				{% endif %}</td>
+		</tr>
+		<tr>
+			<td style="font-size: 24px;" >Max Marks</td>
+			<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			<td>{{assignment.total}}</td>
+			<td></td>
+		</tr>
+		<tr>
+				<td style="font-size: 24px;">Due date</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td >
+					{% if assignment.deadline %}
+						{{assignment.deadline}}
+					{% endif %}
+				</td>
+		</tr>
+		<tr>
+			<td style="font-size: 24px;">csv file</td>
+			<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>
+					{% if assignment.csvfile %}
+						<a href="{{assignment.csvfile.url}}" download>	{{assignment.csvfile}} </a>
+					{% endif %}
+				</td>
+		</tr>
+		<tr>
+			<td style="font-size: 24px;">weightage</td>
+			<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>{{assignment.weightage}}%</td>
+		</tr>
+	</table>
+	<br>
+	<h4>Upload a csv file for evalution</h4>
+	<br>
+	<form method="POST" enctype="multipart/form-data">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<input type="submit" value="submit">
+		
+	</form>
+	<br>
+	<h1>Submissions for {{ak}}</h1>
+	<hr>
+	<table>
+		<tr>
+			<td  style="font-size: 22px;">name</td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			<td style="font-size: 22px;">file</td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			<td style="font-size: 22px;">status of correction</td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+				<td></td>
+				<td></td>
+				<td></td><td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td style="font-size: 22px;">Grade</td>
+				<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+				<td></td>
+				<td></td>
+				<td></td><td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			<td style="font-size: 22px;">feedback</td>
+			<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td style="font-size: 22px;">Give feedback</td>
+		</tr>
+		{% for submission in submissions %}
+			<tr>
+				<td style="font-size: 18px;">{{submission.student.username}}</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td><td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td><a href="{{submission.submittedfile.url}}" download>{{submission.submittedfile}}</a></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td><td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>{{submission.statusofcorrection}}</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td><td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td style='font-size: 18px;'>{{submission.grade}}</td>
+				<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+				<td></td>
+				<td></td>
+				<td></td><td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td style="font-size: 18px;">{{submission.feedback}}</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td><td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td><a href="{% url 'feedback' pk ak submission.student.username %}"><button type="submit">modify or update</button></td> </a>
+			</tr>
+		{% endfor %}
+	</table>
+	<br>
+	<br>
+	<a href="{% url 'viewtacourses' pk %}"><button>Back</button></a>
+</center>
+{% endblock %}

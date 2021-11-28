@@ -1,0 +1,119 @@
+{% extends 'moodle/main.html' %}
+
+{% block content %}
+<center>
+	<br>
+	<h2>{{assignment.name}} Submission</h2>
+	<br>
+	<br>
+	<table>
+		<tr>
+			<td style="font-size: 24px;">file</td>
+			<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				{% if assignment.file %}
+			<td><a href="{{assignment.file.url}}" download>	{{assignment.file}} </a></td>
+				{% else %}
+					<td><p>No file</p></td>
+				{% endif %}
+
+		</tr>
+		<tr>
+			<td style="font-size: 24px;">Statment</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			<td>
+				{% if assignment.statement %}
+					{{assignment.statement}}
+				{% endif %}
+			</td>
+		</tr>
+		<tr>
+			<td style="font-size: 24px;" >Max Marks</td>
+			<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			<td>{{assignment.total}}</td>
+		</tr>
+		<tr>
+			<td style="font-size: 24px;">Due date</td>
+			<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>
+					{% if assignment.deadline %}
+						{{assignment.deadline}}
+					{% else %}
+						<p>No deadline</p>
+					{% endif %}
+				</td>
+		</tr>
+		<tr>
+			<td style="font-size: 24px;">weightage</td>
+			<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>{{assignment.weightage}}%</td>
+		</tr>
+	</table>
+	<br>
+	<br>
+	<br><br>
+<h4>Submit below</h4>
+{% if today.date < assignment.deadline.date %}
+<br>
+	<form method="POST" enctype="multipart/form-data">
+		{% csrf_token %}
+  
+    	{{form.submittedfile.label}}
+    	{{form.submittedfile}} <br><br>
+      
+    <input type="submit" value="Submit">		
+	</form>
+	<br>
+	<a href="{% url 'student' pk %}"><button>Back</button></a>
+
+{% elif today.date == assignment.deadline.date and today.time <= assignment.deadline.time  %}
+	<br>
+	<form method="POST" enctype="multipart/form-data">
+		{% csrf_token %}
+  
+    	{{form.submittedfile.label}}
+    	{{form.submittedfile}} <br><br>
+      
+    <input type="submit" value="Submit">		
+	</form>
+	<br>
+	<a href="{% url 'student' pk %}"><button>Back</button></a>
+{% else %}
+	<p>You are past the due time, current time is {{today.time}}</p>
+{% endif %}
+</center>
+{% endblock %}

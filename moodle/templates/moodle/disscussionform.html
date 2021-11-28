@@ -1,0 +1,88 @@
+{% extends 'moodle/main.html' %}
+{% block content %}
+		
+	<center>
+		<h2>Disscussion forum</h2>
+		<table>
+			<tr>
+				<td><h4>{{title}}</h4></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td><h4>You</h4></td>
+			</tr>
+			<tr><td></td></tr>
+			<tr><td></td></tr>
+			<tr><td></td></tr>
+			<tr><td></td></tr>
+			{% for mes in mess %}
+			<tr>
+				<td>
+					{% if mes.user.username != username %}
+						<p>{{mes.message}} ({{mes.user.username}})</p>
+					{% endif %}
+				</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>
+					{% if mes.user.username == username %}
+						<p>{{mes.message}}</p>
+					{% endif %}
+				</td>
+			</tr>
+			{% endfor %}
+		</table>
+
+		<form method="POST">
+			{% csrf_token %}
+			message:{{form.message}}
+			<br>
+			<input type="submit" name="Send">
+		</form>
+		<br>
+	</center>
+
+{% endblock %}

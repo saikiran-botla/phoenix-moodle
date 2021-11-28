@@ -1,0 +1,26 @@
+{% extends 'moodle/main.html' %}
+
+{% block content %}
+<center>
+
+	<h3>Create Assignment</h3>
+<form method="POST" enctype="multipart/form-data">
+  
+    
+    {% csrf_token %}
+  
+    
+    {{ form.as_p }}
+    Due date: <input type="datetime-local" name="Due date" value="due date"> <br><br>
+    <input type="submit" value="Submit">
+</form>
+<br/>
+<br/>
+{% if mes %}
+    <p style="color: blue;">{{mes}}</p>
+{% endif %}
+</center>
+
+
+{% endblock %}
+

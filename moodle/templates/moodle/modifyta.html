@@ -1,0 +1,13 @@
+{% extends 'moodle/main.html' %}
+
+{% block content %}
+	<center>
+		<h2>Modify Edit privileges for TA {{user}}</h2>
+		<br>
+	<form method="POST">
+		{% csrf_token %}
+		{{form.as_p}}
+		<input type="submit" name="Submit">
+	</form>
+</center>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'moodle/main.html' %}
+
+{% block content %}
+<br>
+<center>
+<h2>Change the password below</h2>
+<br>
+<br>
+
+<form method="POST">
+	{% csrf_token %}
+	{% for fields in form %}
+		{{fields.label}} :
+		{{fields}}<br> <br>
+		
+	{%endfor%}
+	<button type="submit">Save changes</button>
+</form>
+<br>
+<p>After saving changes you will redirected to login page to login with your new password</p>
+
+{% for message in messages %}
+	{{message}}
+
+{%endfor%}
+</center>
+{% endblock %}

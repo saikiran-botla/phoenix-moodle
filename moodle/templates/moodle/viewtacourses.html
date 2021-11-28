@@ -1,0 +1,109 @@
+{% extends 'moodle/main.html' %}
+
+{% block content %}
+<a href="{% url 'home' %}">  Home/</a>
+<a href="{% url 'tacourses' %}">Your Ta courses/</a>
+<center>
+	<h1 >{{title}}</h1>
+	<h3>Assignments</h3><br> 
+	<table>
+		<tr>
+			<td>
+				{% if create_assignment %}
+				<a href="{% url 'assignment' title %}"><button style="font-size: 24px;">Create new Assignment</button></td>
+				{% endif %}
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td>
+				<a href="{% url 'announcement' title %}"><button style="font-size: 24px;">Announcements</button> 
+			</td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td>
+				<a href="{% url 'discussion' title %}"><button style="font-size: 24px;">Discussion forum</button></a>
+			</td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			
+			<td>
+				{% if enroll_student %}
+				<a href="{% url 'enroll' title %}"><button style="font-size: 24px;">Enroll</button></a></td>
+				{% endif %}
+		</tr>
+	</table>
+	<br>
+	<br>
+
+
+{% for Assignment in Assignments %}
+	<a href="{% url 'viewSubmissionta' title Assignment.name %}"><button style="font-size: 22px;">{{Assignment.name}}</button></a> <br> <br>
+
+{% endfor %}
+
+
+
+
+
+
+
+
+
+
+</center>
+
+
+
+
+{% endblock %}

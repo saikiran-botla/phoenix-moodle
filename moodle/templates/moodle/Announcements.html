@@ -1,0 +1,30 @@
+{% extends 'moodle/main.html' %}
+{% block content %}
+	<center>
+		<br>
+		<h2>Course Announcements</h2>
+		<hr>
+		{% for ann in anns %}
+			<p style="font-size:20px;">{{ann.message}}</p>
+			<hr>
+		{% endfor %}
+		{% if ins %}
+		<p style="font-size: 25px;">Make new announcement</p>
+		<form method="POST">
+			{% csrf_token %}
+			{{ form.as_p }}
+			<input type="submit" name="Send">
+			
+		</form>
+
+		<br>
+		<a href="{% url 'instructor' pk %}"><button>Back</button></a>
+		{% elif tas %}
+		<br>
+			<a href="{% url 'viewtacourses' pk %}"><button>Back</button></a>
+		{% else %}
+		<br>
+			<a href="{% url 'student' pk %}"><button>Back</button></a>
+		{% endif %}
+	</center>
+{% endblock %}

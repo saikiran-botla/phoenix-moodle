@@ -1,0 +1,116 @@
+{% extends 'moodle/main.html' %}
+
+{% block content %}
+<center>
+	<br>
+	<br>
+	<h2>Chat with {{user.username}}</h2>
+	<hr>
+	<table>
+		<tr>
+			<td><h4>{{user.username}}</h4></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td> 
+			<td><h4>You</h4></td>
+		</tr>
+		{% for cha in chas %}
+			<tr>
+				<td>
+					{% if cha.sender == user %}
+						<p>{{cha.message}}</p>
+					{% endif %}
+				</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td> 
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td> 
+				<td>
+					{% if cha.sender != user %}
+						<p>{{cha.message}}</p>
+					{% endif %}
+				</td>
+			</tr>
+		{% endfor %}
+	</table>
+	<form method="POST">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<input type="submit" name="send" value="Send">
+		
+	</form>
+	<br/>
+	<a href="{% url 'listchat' %}"><button>Back</button></a>
+</center>
+{% endblock %}
