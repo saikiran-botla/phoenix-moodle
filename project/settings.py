@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-h%9j&&i#a!42)(c=_4$acak=)h_a_fq&645=n8+(+-*!1j!0dy'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['phoenix-moodle.herokuapp.com','127.0.0.1']
 
 
 # Application definition
