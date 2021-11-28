@@ -100,7 +100,7 @@ def reset(request):
 			return render(request,'./moodle/reset.html',{'form':form})
 
 	else:
-		
+
 		form=PasswordChangeForm(request.user)
 		return render(request,'./moodle/reset.html',{'form':form})
 
@@ -390,7 +390,7 @@ def viewSubmission(request,pk,ak):
 			
 			assignment.csvfile=file
 			assignment.save()
-			return render(request,'moodle/viewsubmissions.html',{'submissions':submissions1,'pk':course.title,'ak':assignment.name,'assignment':assignment,'form':form,'mean':mean,'var':var,'image_base64':image_base64})			
+			return render(request,'moodle/viewsubmissions.html',{'submissions':submissions,'pk':course.title,'ak':assignment.name,'assignment':assignment,'form':form,'mean':mean,'var':var,'image_base64':image_base64})			
 
 		else:
 			return render(request,'moodle/viewsubmissions.html',{'submissions':submissions,'pk':course.title,'ak':assignment.name,'assignment':assignment,'form':form,'mean':mean,'var':var,'image_base64':image_base64})						 
