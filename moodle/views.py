@@ -20,6 +20,7 @@ import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import io
 import urllib, base64
+from random import randint
 
 
 def loginPage(request):
@@ -66,10 +67,27 @@ def logoutPage(request):
 	logout(request)
 	return redirect('login')
 
+OTP=randint(100000,999999)
 @login_required(login_url='login')
 def reset(request):
 
+	#OTP=randint(100000,999999)
+	send_mail(
+		"OTP for password change",
+		"Here is your OTP for password change :"+str(OTP)+".\n please enter carefully without anyspaces before or between or after the digits",
+		'1457205saikiran@gmail.com',
+		[request.user.email],
+		fail_silently=True,
+		)
+
 	if request.method=="POST":
+
+		OTPgi=request.POST.get('OTP')
+		if OTP != int(OTPgi):
+			form=PasswordChangeForm(request.user)
+			messages.error(request,"OTP is incorrect"+str(OTPgi) + str(OTP))
+			return render(request,'./moodle/reset.html',{'form':form}) 
+
 		form=PasswordChangeForm(request.user,request.POST)
 		if form.is_valid():
 			user=form.save()
@@ -82,6 +100,7 @@ def reset(request):
 			return render(request,'./moodle/reset.html',{'form':form})
 
 	else:
+		
 		form=PasswordChangeForm(request.user)
 		return render(request,'./moodle/reset.html',{'form':form})
 
@@ -391,6 +410,7 @@ def grade(request,pk):
 	coursetotal=0
 
 	mean=dict()
+	y=list()
 
 	for assignment in assignments:
 		
@@ -408,9 +428,26 @@ def grade(request,pk):
 			sub=Submission.objects.get(student=request.user,assignment=assignment)
 			if sub.statusofcorrection=="DONE" :
 				coursetotal=float(assignment.weightage)/100.0 * (int(sub.grade) * 100.0)/assignment.total
+				y.append(sub.grade*100.0/assignment.total)
 			mysubmissions.append(sub)
 
-	return render(request,'moodle/grades.html',{'assignments':assignments,'mysubmissions':mysubmissions,'pk':pk,'coursetotal':coursetotal,'mean':mean})
+	
+
+	y=np.array(y)
+
+	z=np.arange(1,np.size(y)+1)
+	plt.plot(z,y)
+	plt.xlabel("Assignment number")
+	plt.ylabel("percentage of marks obtained")
+	plt.title("Your progress")
+
+	buf=io.BytesIO()
+	plt.savefig(buf,format='png',dpi=300)
+	image_base64=base64.b64encode(buf.getvalue()).decode('utf-8').replace('\n','')
+	buf.close()
+	plt.clf()
+
+	return render(request,'moodle/grades.html',{'assignments':assignments,'mysubmissions':mysubmissions,'pk':pk,'coursetotal':coursetotal,'mean':mean,'image_base64':image_base64})
 
 	
 
