@@ -14,7 +14,7 @@
 
 			{% if today.date < assignment.deadline.date %}
 				Due on {{assignment.deadline}}
-			{% elif today.date == assingment.deadline.date and today.time <= assignment.deadline.time %}
+			{% elif today.date == assignment.deadline.date and today.time <= assignment.deadline.time %}
 				Due on {{assignment.deadline}}
 			{% else %}
 				Over due
